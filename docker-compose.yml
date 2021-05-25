@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    ports:
+      - '8080:3005'
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: db
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: bank

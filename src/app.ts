@@ -5,6 +5,8 @@ import compression from 'compression';
 import morgan from 'morgan';
 
 import apiRouter from './routes/index';
+import transactionQueue from './queues/transactions';
+import { processTransfer } from './controllers/processTransfer';
 
 const app = express();
 
@@ -42,6 +44,8 @@ app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+transactionQueue.process(processTransfer);
 
 app.use('/api', apiRouter);
 

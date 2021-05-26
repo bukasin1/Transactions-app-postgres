@@ -5,12 +5,25 @@ services:
     build: .
     ports:
       - '8080:3005'
-    links:
+    depends_on:
       - postgres
+      - redis
 
   postgres:
     image: postgres:13.3-alpine
+    ports:
+      - '5400:5432'
     environment:
       POSTGRES_USER: db
       POSTGRES_PASSWORD: example
       POSTGRES_DB: bank
+
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 1s
+      timeout: 3s
+      retries: 30

@@ -47,3 +47,56 @@ export async function transferFunds(data: Record<string, unknown>) {
 
   transactionsQueue.add({ ...value, reference, integerAmount });
 }
+
+const createAccountSchema = joi
+  .object({
+    deposit: joi.number().precision(2).positive().required(),
+    account_number: joi.string().length(10).required(),
+  })
+  .rename('accountNumber', 'account_number');
+
+export async function createAccount(data: Record<string, unknown>) {
+  const { value, error } = createAccountSchema.validate(data, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  const { deposit, ...rest } = value;
+
+  const balance = Math.trunc(deposit * 100);
+  const record = {
+    ...rest,
+    balance,
+  };
+
+  //Todo: Check if the account number already exists
+
+  return sql`INSERT into balances ${sql(
+    record,
+  )} RETURNING id, account_number, balance`;
+}
+
+const getBalanceSchema = joi
+  .object({
+    account_number: joi.string().length(10).required().label('accountNumber'),
+  })
+  .rename('accountNumber', 'account_number');
+
+export async function getAccountBalance(data: Record<string, unknown>) {
+  const { value, error } = getBalanceSchema.validate(data, {
+    stripUnknown: true,
+    abortEarly: false,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  const { account_number } = value;
+
+  return sql`SELECT balance FROM balances WHERE account_number=${account_number}`;
+}

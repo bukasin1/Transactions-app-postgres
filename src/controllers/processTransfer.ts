@@ -24,19 +24,19 @@ export async function processTransfer(job: Bull.Job<TransactionData>) {
     const date = new Date().toISOString();
 
     const fromBalanceUpdate = {
-      balance: fromCurrentBalance - integerAmount,
+      balance: BigInt(fromCurrentBalance) - BigInt(integerAmount),
       updated_at: date,
     };
 
     const toBalanceUpdate = {
-      balance: toCurrentBalance + integerAmount,
+      balance: BigInt(toCurrentBalance) + BigInt(integerAmount),
       updated_at: date,
     };
 
     const transactionsUpdate = {
       from_account,
       to_account,
-      amount: integerAmount,
+      amount: BigInt(integerAmount),
       description,
       reference,
     };

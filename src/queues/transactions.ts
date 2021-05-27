@@ -4,8 +4,6 @@ import env from '../env';
 
 const queueStorage = env.require('REDIS_URL');
 
-console.log(queueStorage);
-
 export interface TransactionData {
   from_account: string;
   to_account: string;

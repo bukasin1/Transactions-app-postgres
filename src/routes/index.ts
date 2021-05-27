@@ -21,12 +21,6 @@ router.post(
       res.status(400).json({ message: 'Could not complete the transaction' });
     }
 
-    // Validate
-    // Check balance (locks)
-    // Add to Transaction Queue
-
-    // Update Balance (locks)
-    // Write transaction
     return;
     res.status(200).json({ message: 'Transaction completed successfully' });
   },

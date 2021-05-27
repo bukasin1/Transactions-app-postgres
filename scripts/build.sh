@@ -1,6 +1,7 @@
 if [ ! -f '.env' ]; then
-  echo '.env file exists - skipping'
+  cp .env.example .env
 fi
 
-
-docker-compose up
+npm run compile
+npm run migrate up
+docker-compose up -d

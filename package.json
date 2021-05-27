@@ -6,7 +6,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "compile": "tsc",
     "build": "scripts/build.sh",
+    "seed": "node scripts/seed.js",
     "start": "./bin/www",
     "test": "jest",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",

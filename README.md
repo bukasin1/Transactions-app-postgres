@@ -37,9 +37,7 @@ To seed the DB with three accounts.
 
 ```
 account: 1234567890, balance: 10000.00
-
 account: 0123456789, balance: 0.00
-
 account: 1357924680, balance: 500.00
 ```
 
@@ -47,9 +45,9 @@ To create an account the endpoint is `http://localhost:3005/api/create-account`
 
 To make a transfer the endpoint is `http://localhost:3005/api/transfer`
 
-To view the account balance for an account the endpoint is `localhost:3005/api/balance/{{accountNumber}}`
+To view the account balance for an account the endpoint is `http://localhost:3005/api/balance/{{accountNumber}}`
 
-NOTE: {{accountNumber}} should be replaced with an existing account number.
+NOTE: `{{accountNumber}}` should be replaced with an existing account number. For example, to check the account balance of account `1234567890`, you would send a `GET`request to `http://localhost:3005/api/balance/1234567890`
 
 ## Considerations
 

@@ -50,7 +50,7 @@ router.post(
       await transferFunds(req.body);
 
       res.status(200).json({ message: 'Transfer success' });
-    } catch (error) {
+    } catch (error: any) {
       res.status(400).json({
         message: 'Could not complete the transaction',
         error: error.message,

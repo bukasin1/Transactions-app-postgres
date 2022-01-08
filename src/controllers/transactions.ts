@@ -1,8 +1,8 @@
 import joi from 'joi';
-import { v4 } from 'uuid';
+// import { v4 } from 'uuid';
 
 import sql from '../stores/db';
-import transactionsQueue from '../queues/transactions';
+// import transactionsQueue from '../queues/transactions';
 
 interface Transfer {
   from_account: string;
@@ -43,9 +43,9 @@ export async function transferFunds(data: Record<string, unknown>) {
     throw Error('Insufficient Balance');
   }
 
-  const reference = v4();
+  // const reference = v4();
 
-  transactionsQueue.add({ ...value, reference, integerAmount });
+  // transactionsQueue.add({ ...value, reference, integerAmount });
 }
 
 const createAccountSchema = joi
